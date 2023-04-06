@@ -1,5 +1,5 @@
 [package]
-name = "ex4_average"
+name = "ex4_quadratic"
 version = "0.1.0"
 edition = "2021"
 
