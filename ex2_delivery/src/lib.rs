@@ -1,3 +1,7 @@
+// TASK:
+//
+// Complete the `delivery_cost` function.
+
 pub enum UserSubscription {
     /// The user is not subscribed.
     NotSubscribed,
