@@ -1,3 +1,7 @@
+// TASK:
+// 1. Implement the increase_volume and decrease_volume functions so that they increase or decrease the volume by 5%, passing the tests.
+// 2. Implement the main function
+
 fn increase_volume(volume: i32) -> i32 {
     todo!("Increase the volume by 5%")
 }
@@ -8,21 +12,13 @@ fn decrease_volume(volume: i32) -> i32 {
 
 fn main() {
     let term = console::Term::stdout();
-    let mut volume = 50;
 
+    // this is how you read a single character from the terminal
+    let c = term.read_char().expect("Failed to read input");
+    // this is how you print formatted text to the terminal
+    println!("You pressed: {}", c);
 
-    loop {
-        println!("Current volume: {}%", volume);
-        println!("Do you want to increase or decrease the volume? (i/d)");
-
-        match term.read_char().expect("Failed to read input") {
-            'i' => volume = increase_volume(volume),
-            'd' => volume = decrease_volume(volume),
-            _ => println!("Invalid input"),
-        }
-
-        println!();
-    }
+    todo!("Loop indefinitely, read a character specifying whether the volume should be increased or decreased and print the new volume");
 }
 
 #[cfg(test)]
