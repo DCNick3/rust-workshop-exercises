@@ -29,7 +29,7 @@ fn main() {
         println!("Current volume: {}", volume);
         println!("What should I do (i/d)?");
 
-        let c = term.read_char().unwrap();
+        let c = term.read_char().expect("Failed to read character");
         if c == 'i' {
             volume = increase_volume(volume);
         } else if c == 'd' {
