@@ -3,22 +3,41 @@
 // 2. Implement the main function
 
 fn increase_volume(volume: i32) -> i32 {
-    todo!("Increase the volume by 5%")
+    let volume = volume + 5;
+    if volume > 100 {
+        100
+    } else {
+        volume
+    }
 }
 
 fn decrease_volume(volume: i32) -> i32 {
-    todo!("Decrease the volume by 5%")
+    let volume = volume - 5;
+    if volume < 0 {
+        0
+    } else {
+        volume
+    }
 }
 
 fn main() {
     let term = console::Term::stdout();
 
-    // this is how you read a single character from the terminal
-    let c = term.read_char().expect("Failed to read input");
-    // this is how you print formatted text to the terminal
-    println!("You pressed: {}", c);
+    let mut volume = 50;
 
-    todo!("Loop indefinitely, read a character specifying whether the volume should be increased or decreased and print the new volume");
+    loop {
+        println!("Current volume: {}", volume);
+        println!("What should I do (i/d)?");
+
+        let c = term.read_char().unwrap();
+        if c == 'i' {
+            volume = increase_volume(volume);
+        } else if c == 'd' {
+            volume = decrease_volume(volume);
+        } else {
+            println!("Unknown action");
+        }
+    }
 }
 
 #[cfg(test)]
