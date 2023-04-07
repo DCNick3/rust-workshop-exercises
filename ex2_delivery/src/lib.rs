@@ -19,7 +19,12 @@ pub enum UserSubscription {
 /// A subscribed user gets free delivery if the order cost is 500 or more.
 /// If the user has been subscribed for 12 months or more, they get free delivery regardless of the order cost.
 pub fn delivery_cost(subscription: UserSubscription, order_cost: u32) -> u32 {
-    todo!("Calculate the delivery cost")
+    use UserSubscription::*;
+    match subscription {
+        NotSubscribed if order_cost >= 1000 => 0,
+        Subscribed { months } if order_cost >= 500 || months >= 12 => 0,
+        _ => 50,
+    }
 }
 
 #[cfg(test)]
@@ -30,9 +35,21 @@ mod test {
     fn test_delivery_cost() {
         assert_eq!(delivery_cost(UserSubscription::NotSubscribed, 1000), 0);
         assert_eq!(delivery_cost(UserSubscription::NotSubscribed, 999), 50);
-        assert_eq!(delivery_cost(UserSubscription::Subscribed { months: 11 }, 500), 0);
-        assert_eq!(delivery_cost(UserSubscription::Subscribed { months: 11 }, 499), 50);
-        assert_eq!(delivery_cost(UserSubscription::Subscribed { months: 12 }, 500), 0);
-        assert_eq!(delivery_cost(UserSubscription::Subscribed { months: 12 }, 499), 0);
+        assert_eq!(
+            delivery_cost(UserSubscription::Subscribed { months: 11 }, 500),
+            0
+        );
+        assert_eq!(
+            delivery_cost(UserSubscription::Subscribed { months: 11 }, 499),
+            50
+        );
+        assert_eq!(
+            delivery_cost(UserSubscription::Subscribed { months: 12 }, 500),
+            0
+        );
+        assert_eq!(
+            delivery_cost(UserSubscription::Subscribed { months: 12 }, 499),
+            0
+        );
     }
 }
